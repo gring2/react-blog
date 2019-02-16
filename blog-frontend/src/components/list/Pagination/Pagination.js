@@ -1,22 +1,22 @@
-import React from 'react'
-import styles from './Pagination.module.scss'
-import classNames from 'classnames/bind'
-import Button from 'components/common/Button'
+import React from 'react';
+import styles from './Pagination.scss';
+import classNames from 'classnames/bind';
+import Button from 'components/common/Button';
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 
 const Pagination = () => (
-  <div className={ cx('pagination') }>
+  <div className={cx('pagination')}>
     <Button disabled>
-      previous
+      이전 페이지
     </Button>
     <div className={cx('number')}>
-      Page 1
+      페이지 1
     </div>
     <Button>
-      Next
+      다음 페이지
     </Button>
   </div>
-)
+);
 
-export default Pagination
+export default Pagination;
