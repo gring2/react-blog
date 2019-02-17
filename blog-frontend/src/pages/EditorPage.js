@@ -1,17 +1,11 @@
-import React from 'react';
-import EditorTemplate from 'components/editor/EditorTemplate';
-import EditorHeader from 'components/editor/EditorHeader';
-import EditorPaneContainer from 'containers/editor/EditorPaneContainer';
-import PreviewPaneContainer from 'containers/editor/PreviewPaneContainer';
+import React from 'react'
 
 const EditorPage = () => {
   return (
-    <EditorTemplate
-      header={<EditorHeader/>}
-      editor={<EditorPaneContainer/>}
-      preview={<PreviewPaneContainer/>}
-    />
-  );
-};
+    <div>
+      Editor
+    </div>
+  )
+}
 
-export default EditorPage;
+export default EditorPage

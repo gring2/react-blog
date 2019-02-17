@@ -1,1 +1,1 @@
-export { default } from './ListWrapper';
+export { default } from './ListWrapper'
