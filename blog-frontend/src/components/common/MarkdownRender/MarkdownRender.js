@@ -3,14 +3,24 @@ import styles from './MarkdownRender.module.scss'
 import classNames from 'classnames/bind'
 
 import marked from 'marked'
-
-import Prism from 'prismjs'
 import 'prismjs/themes/prism-okaidia.css'
 
-import 'prismjs/components/prism-bash.min.js'
-import 'prismjs/components/prism-javascript.min.js'
-import 'prismjs/components/prism-jsx.min.js'
-import 'prismjs/components/prism-css.min.js'
+let Prism = null;
+const isBrowser = process.env.APP_ENV === 'browser';
+if (isBrowser) {
+  Prism = require('prismjs')
+  require('prismjs/components/prism-bash.min.js')
+  require('prismjs/components/prism-javascript.min.js')
+  require('prismjs/components/prism-jsx.min.js')
+  require('prismjs/components/prism-css.min.js')
+
+}
+// import Prism from 'prismjs'
+
+// import 'prismjs/components/prism-bash.min.js'
+// import 'prismjs/components/prism-javascript.min.js'
+// import 'prismjs/components/prism-jsx.min.js'
+// import 'prismjs/components/prism-css.min.js'
 
 const cx = classNames.bind(styles)
 
@@ -41,6 +51,13 @@ export default class MarkdownRender extends Component {
     this.state = {
       html: markdown? marked(markdown, {breaks: true, sanitize: true}): ''
     }
+  }
+
+  componentDidMount(){
+    setTimeout(() => {
+      Prism.highlight()
+
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {

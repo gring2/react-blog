@@ -11,6 +11,13 @@ exports.checkObjectId = (ctx, next) => {
   return next()
 }
 
+exports.checkLogin = (ctx, next) => {
+  if (!ctx.session.logged) {
+    ctx.status = 401
+    return null
+  }
+  return next()
+}
 const Post = require('models/post')
 const Joi = require('joi')
 
@@ -45,6 +52,11 @@ exports.write = async (ctx) => {
 
 exports.list = async (ctx) => {
   const page = parseInt(ctx.query.page || 1, 10)
+  const { tag } = ctx.query
+
+  const query = tag ? {
+    tags: tag
+  } : {}
 
   if (page < 1) {
     ctx.status = 400
@@ -52,12 +64,12 @@ exports.list = async (ctx) => {
   }
 
   try {
-    const posts = await Post.find().sort({ _id: -1 }).limit(10)
+    const posts = await Post.find(query).sort({ _id: -1 }).limit(10)
       .skip((page - 1) * 10)
       .lean()
       .exec()
 
-    const postCount = await Post.count().exec()
+    const postCount = await Post.count(query).exec()
     const limitBobyLength = post => ({
       ...post,
       body: post.body.length < 200 ? post.body : `${post.body.slice(0, 200)}...`
