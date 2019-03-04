@@ -8,7 +8,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 환경변수를 설정하기 위한 설정
 const publicPath = paths.servedPath;
 const publicUrl = publicPath.slice(0, -1);
+console.log('publicPath: ' + publicPath)
 const env = getClientEnvironment(publicUrl);
+
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
