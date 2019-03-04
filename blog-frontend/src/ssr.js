@@ -8,6 +8,7 @@ import axios from 'axios'
 import transit from 'transit-immutable-js'
 
 import App from 'components/App'
+import { Helmet } from 'react-helmet'
 
 const render = async (ctx) => {
   const { url, origin } = ctx
@@ -35,16 +36,26 @@ const render = async (ctx) => {
   }catch(e){
 
   }
+
+  const context = {}
+
   const html = ReactDOMServer.renderToString(
     <Provider store={store}>
-      <StaticRouter location={url}>
+      <StaticRouter location={url} context={context}>
         <App/>
       </StaticRouter>
     </Provider>
   )
+
+  if(context.isNotFound) {
+    console.log('not found')
+  }
+
+  const helmet = Helmet.renderStatic()
+
   const preloadedState = JSON.stringify(transit.toJSON(store.getState())).replace(/</g, '\\u003c')
 
-  return {html, preloadedState}
+  return {html, preloadedState, helmet}
 }
 
 export default render

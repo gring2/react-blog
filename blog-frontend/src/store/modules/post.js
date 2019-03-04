@@ -26,6 +26,15 @@ export default handleActions({
     onSuccess: (state, action) => {
       const { data: post } = action.payload
       return state.set('post', fromJS(post))
+    },
+    onError(state, action){
+      console.log(state)
+      console.log(action)
+    },
+    onFailure(state, action) {
+      console.log(state)
+      console.log(action)
+
     }
   })
 

@@ -18,9 +18,10 @@ const PostPage = ({match}) => {
 PostPage.preload = (dispatch, params ) => {
   const { id } = params
   const PostActions  = bindActionCreators(postActions, dispatch)
-  return PostActions.getPost({
+  console.log('PostPage.js id : ',)
+  return PostActions.getPost(
     id
-  })
+  )
 }
 
 
